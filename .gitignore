@@ -1,0 +1,7 @@
+data/
+.cache/pip/http/c/b/a/3/c/cba3c9321f428c4afe21c0c8951275d6065eb812a94ce731c8718429
+.cache/
+nltk_data/
+app/update/preprocessing/imputer_stueck.pkl
+app/update/preprocessing/
+app/api/model/
