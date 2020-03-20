@@ -4,10 +4,24 @@ from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from keras import backend as K
 from sklearn.metrics import roc_auc_score, precision_score, recall_score
+import pickle
+
+def unpickle_data(data):
+    df = data.copy()
+    columns = ['clicked_before', 'text_vec', 'anbieterid_enc_user', 'anbietermarktplatz_enc_user', 'warengruppe_enc_user', 'text_vec_user']
+    for column in columns:
+        try:
+            df[column] = [pickle.loads(df.loc[i,column]) for i in range(len(df))]
+        except KeyError:
+            pass
+    return (df)
+
+
 
 # transform data 
-def transform(data_bundle, max_length):
+def transform(data, max_length):
     #data_bundle = data_bundle.dropna().reset_index()
+    data_bundle = unpickle_data(data)
     # context
     month = np.nan_to_num(data_bundle.month_enc.values.reshape(-1,1))
     days_online = np.nan_to_num(data_bundle.days_online_std.values.reshape(-1,1))#, dtype = "float32")
@@ -44,7 +58,9 @@ def transform(data_bundle, max_length):
     x_values = [month, days_online, item_anbieter, item_mkt, item_wg, item_preis, item_ve, item_text, user_mkt, user_anbietermkt, user_wg, user_anbieter, user_preis, user_ve, user_text]
     return(x_values)
 
-def transform_log(data_bundle, max_length):
+
+def transform_log(data, max_length):
+    data_bundle = unpickle_data(data)
     #data_bundle = data_bundle.dropna().reset_index()
     # context
     month = np.nan_to_num(data_bundle.month_enc.values.reshape(-1,1))

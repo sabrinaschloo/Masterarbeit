@@ -2,11 +2,12 @@ import pandas as pd
 from keras.preprocessing.sequence import pad_sequences
 from keras import backend as K
 import numpy as np
+import pickle
 
 max_length = 200
 
 # needed for sqlite - need to unpickle all arrays in db
-def unpickle_data(df):
+def unpickle_data(data):
     df = data.copy()
     columns = ['clicked_before', 'text_vec', 'anbieterid_enc_user', 'anbietermarktplatz_enc_user', 'warengruppe_enc_user', 'text_vec_user']
     for column in columns:
@@ -26,7 +27,7 @@ def generate_batches_shuffle_new(engine, batch_size, train_list):
                 #end = int(batch + batch_size)
                 # get batch from db
                 query = f"""
-                    SELECT * FROM target_training_enc where index IN {batch_items}
+                    SELECT * FROM target_training_enc where [index] IN {batch_items}
                 """
                 data_bundle_db = pd.read_sql_query(query, engine)
                 # needed for sqlite
