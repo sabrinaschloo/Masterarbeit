@@ -6,4 +6,9 @@ RUN pip --quiet install \
     keras \
     gensim \
     scikit-learn==0.21.3 \
-    nltk
+    nltk \
+    feather-format \
+    bs4 \
+    hyperopt \
+    hyperas \
+    scikit-plot

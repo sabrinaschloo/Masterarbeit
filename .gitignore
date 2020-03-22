@@ -5,3 +5,4 @@ nltk_data/
 app/update/preprocessing/imputer_stueck.pkl
 app/update/preprocessing/
 app/api/model/
+07_2_Evaluate_NeuMF-Copy1.ipynb
