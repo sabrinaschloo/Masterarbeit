@@ -16,5 +16,9 @@ Steps for development:
 
 The implementation of the final model can be found in /app
 - /api is the code implemented for the API to query the model. The API can be tested with the docker container sabrinaschloo/dl_recommender:api, which contains the necessary packages, scripts, and model. The container makes the API available on port 2255, it should be started with the following command:
-docker run -p 2255:2255 -v "location_of_/data":/data -d -net=host sabrinaschloo/dl_recommeder:api
+  
+  docker run -p 2255:2255 -v "location_of_/data":/data -d sabrinaschloo/dl_recommeder:api
+  
+ The API can be queried with the example code in /app/query_api.py or the postman request in  https://www.getpostman.com/collections/94e447a37e159325eccd
+ 
 - /update is the code implemented for the update container, which keeps the item and user profile up to date. This code cannot be run, since the connection to the live data base is not available. 
