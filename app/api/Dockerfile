@@ -1,9 +1,9 @@
 FROM tensorflow/tensorflow:1.15.0-py3
 
-#COPY . /api #remove /app/api everywhere is stupid 
+COPY . /api 
 
 # ich glaube auch wenn ich es nicht reinkopiere kann ich das und unten den Command einstellen !
-#WORKDIR /api
+WORKDIR /api
 
 RUN pip install --upgrade pip
 
@@ -20,4 +20,4 @@ RUN pip --quiet install \
 
 EXPOSE 2255
 
-CMD ['python', 'api.py']
+CMD ["python", "api.py"]

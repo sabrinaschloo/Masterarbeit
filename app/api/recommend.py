@@ -22,7 +22,8 @@ std_days_online = pickle.load (open( "/api/model/preprocessing/new_scaler_days_o
 
 
 def rank_list(model, engine, userid, df_in):
-    data_u = pd.read_sql("SELECT * FROM user_enc where userid = %(user)s ", engine, params = {'user' : str(userid)})
+    query_u = f"SELECT * FROM user_enc where userid = {userid} "
+    data_u = pd.read_sql(query_u, engine)
     # send error message if user not in db yet
     if len(data_u) == 0:
         df =  df_in.copy()
@@ -33,7 +34,8 @@ def rank_list(model, engine, userid, df_in):
         ### try this new pd. function
         #query = "select * from TABLENAME"
         #df = pd.read_sql_query(query, sql_engine)
-        data_i = pd.read_sql("SELECT * FROM item_enc where anbieter_artikelnummer IN %(items)s ", engine, params = {'items' : tuple(df_in.anbieter_artikelnummer.tolist())})
+        query_i = f"SELECT * FROM item_enc where anbieter_artikelnummer IN {tuple(df_in.anbieter_artikelnummer.tolist())} "
+        data_i = pd.read_sql(query_i, engine)
         ### join data
         # add userID for join and join
         data_i.loc[:,'userid'] = str(userid)
@@ -55,7 +57,7 @@ def transform(data_bundle_in, max_length):
     data_bundle = unpickle_data(data_bundle_in)
     # context
     month = np.repeat(datetime.now().month, len(data_bundle)).reshape(-1,1)
-    online = (datetime.now() - data_bundle.erstanlagedatum)
+    online = (datetime.now() - pd.to_datetime(data_bundle.erstanlagedatum, format = "%Y-%m-%d %H:%M:%S"))
     days_online_unsc = [online[i].days for i in range(len(online))]
     days_online_log = np.array([np.log(days_online_unsc[i] +1e-2 ) for i in range(len(online))]).reshape(-1,1)
     days_online = std_days_online.transform(days_online_log)
@@ -88,7 +90,7 @@ def transform(data_bundle_in, max_length):
     return(x_values)
 
 
-def unpickle_data(df):
+def unpickle_data(data):
     df = data.copy()
     columns = ['clicked_before', 'text_vec', 'anbieterid_enc_user', 'anbietermarktplatz_enc_user', 'warengruppe_enc_user', 'text_vec_user']
     for column in columns:

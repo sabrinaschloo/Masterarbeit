@@ -20,7 +20,7 @@ import NeuMF as NeuMF
 #DATABASE_URI = 'postgres+psycopg2://postgres:power2020@host.docker.internal:5431/person_recommender' # needs change
 #DATABASE_URI = 'postgres+psycopg2://postgres:power2020@co1.db.schimmel:5432/person_recommender' # needs change
 #engine = create_engine(DATABASE_URI)
-engine = sqlite3.connect('/data/db.db')
+engine = sqlite3.connect('/data/db.db', check_same_thread=False)
 
 
 app = Flask(__name__)
