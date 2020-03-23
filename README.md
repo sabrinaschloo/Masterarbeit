@@ -3,7 +3,8 @@ A Recommender System for Retail Sourcing based on Deep Learning
 
 This repository includes all code for the development and evaluation of the Hybrid NeuMF developed for the wholesale marketplace zentrada.
 
-The code can be run with the docker image sabrinaschloo/dl_recommender:notebook, it inlcudes all necessary packages and should be started with the command_
+## Model Development
+The code can be run with the docker image sabrinaschloo/dl_recommender:notebook, it inlcudes all necessary packages and should be started with the command:
 
   docker run -8888:8888 -v "location_of_masterarbeit":/home/jovyan --name tensorflow-notebook sabrinaschloo/dl_recommender:notebook
 
@@ -16,6 +17,7 @@ The notebooks describe the following steps in development:
 - 06 extract embedding vectors for visualization with the embedding projector
 - 07-08 train and evaluate the baseline models NeuMF and Hybrid NeuMF Text
 
+## Model Implementation
 The implementation of the final model can be found in /app
 - /api is the code implemented for the API to query the model. The API can be tested with the docker container sabrinaschloo/dl_recommender:api, which contains the necessary packages, scripts, and model. The container makes the API available on port 2255, it should be started with the following command:
   
