@@ -11,4 +11,5 @@ RUN pip --quiet install \
     bs4 \
     hyperopt \
     hyperas \
-    scikit-plot
+    scikit-plot \
+    psycopg2-binary
