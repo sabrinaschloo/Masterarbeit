@@ -3,7 +3,7 @@ A Recommender System for Retail Sourcing based on Deep Learning
 
 This repository includes all code for the development and evaluation of the Hybrid NeuMF developed for the wholesale marketplace zentrada.
 
-The code can be run with the docker image sabrinaschloo/dl_recommender:notebook, it inlcudes all necessary packages and should be started with the command_
+The code can be run with the docker image sabrinaschloo/dl_recommender:notebook, it inlcudes all necessary packages and should be started with the command:
 
   docker run -8888:8888 -v "location_of_masterarbeit":/home/jovyan --name tensorflow-notebook sabrinaschloo/dl_recommender:notebook
 
