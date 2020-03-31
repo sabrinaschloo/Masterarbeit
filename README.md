@@ -6,7 +6,7 @@ This repository includes all code for the development and evaluation of the Hybr
 ## Model Development
 The code can be run with the docker image sabrinaschloo/dl_recommender:notebook, it inlcudes all necessary packages and should be started with the command:
 
-  docker run -8888:8888 -v "location_of_masterarbeit":/home/jovyan --name tensorflow-notebook sabrinaschloo/dl_recommender:notebook
+  docker run -p 8888:8888 -v "location_of_masterarbeit":/home/jovyan --name tensorflow-notebook sabrinaschloo/dl_recommender:notebook
 
 All necessary data is in the google drive folder "data", which needs to be copied into this repository.
 
