@@ -14,24 +14,14 @@ import sqlalchemy as db
 
 
 ###### Db Connection ###### 
-# test
-# pre = "app/update/" # auch in funktionen ändern ! 
-# import app.update.user as user
-# import app.update.item as item
-# person_recommender_db = "host='host.docker.internal' port='5431' dbname='person_recommender' user='postgres' password='power2020'"
-# rec_db = 'postgres+psycopg2://postgres:power2020@host.docker.internal:5431/person_recommender'
-# mariadb_str = "host='host.docker.internal',port=3306,user='bigdata',password='Byckd4t4',database='bigdata'"
-
-
-
 # production 
 pre = "/update/" 
 import user as user
 import item as item
-person_recommender_db = "host='co1.db.schimmel' port='5432' dbname='person_recommender' user='postgres' password='power2020'"
-mariadb_str = "host='192.168.3.114', port='3306', user='bigdata', password='Byckd4t4', database='bigdata'"
+person_recommender_db = ###
+mariadb_str = ###
 # maria_db
-rec_db = 'postgres+psycopg2://postgres:power2020@co1.db.schimmel:5432/person_recommender'
+rec_db = ###
 
 
 #### Add new Users  ####
@@ -42,7 +32,7 @@ with open (pre + 'preprocessing/max_regdate.pkl', 'rb') as f: ## needs change
 #max_reg = "2020-01-21 23:59:41"
 
 # connect to stastic db
-mariadb_connection = mariadb.connect(host='192.168.3.114', port='3306', user='bigdata', password='Byckd4t4', database='bigdata') 
+mariadb_connection = mariadb.connect('###') 
 cursor_maria = mariadb_connection.cursor(buffered=True)
 
 # select users
@@ -89,7 +79,7 @@ print('%s new users added to db' % (len(new_user_done),))
 #### Get Data zu Update based on Clicks ####
 
 conn_rec = psycopg2.connect(person_recommender_db)
-mariadb_connection = mariadb.connect(host='192.168.3.114', port='3306', user='bigdata', password='Byckd4t4', database='bigdata')
+mariadb_connection = mariadb.connect('###')
 cursor_maria = mariadb_connection.cursor(buffered=True)
 
 last_click = pd.read_sql("select MAX(datum_last_click) from item_features_raw", conn_rec) # fehlt noch das genaue herausholen des Datums !! 
@@ -155,7 +145,7 @@ print("all items updated")
 
 ######### Update users in db ###########
 engine_rec_db = create_engine(rec_db)
-mariadb_connection = mariadb.connect(host='192.168.3.114', port='3306', user='bigdata', password='Byckd4t4', database='bigdata')
+mariadb_connection = mariadb.connect('###')
 cursor_maria = mariadb_connection.cursor(buffered=True)
 
 update_users.reset_index (drop = True, inplace = True)
